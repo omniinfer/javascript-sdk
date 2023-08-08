@@ -1,0 +1,34 @@
+{
+  "name": "omniinfer-sdk",
+  "browser": "dist/index.js",
+  "version": "1.0.0",
+  "keywords": [
+    "omniinfer",
+    "sdk",
+    "stable diffusion api",
+    "typescript",
+    "es"
+  ],
+  "description": "omniinfer api sdk ",
+  "main": "dist/index",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "rollup --config"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.22.9",
+    "@babel/preset-env": "^7.22.9",
+    "@rollup/plugin-babel": "^6.0.3",
+    "@rollup/plugin-commonjs": "^25.0.3",
+    "@rollup/plugin-json": "^6.0.0",
+    "@rollup/plugin-node-resolve": "^15.1.0",
+    "@rollup/plugin-typescript": "^11.1.2",
+    "eslint": "^8.46.0",
+    "rollup": "^3.27.1",
+    "typescript": "^5.1.6"
+  }
+}

@@ -1,0 +1,5 @@
+test/**
+lib/**
+types/**
+rollup.config.mjs
+rollup.config.js
