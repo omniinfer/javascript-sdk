@@ -77,9 +77,10 @@ export type Lora = {
 export type ControlnetUnit = {
   model: string;
   weight: number | undefined;
-  control_mode: number;
+  control_mode: 0 | 1 | 2;
   module: string;
   input_image: string;
+  [key: string]: string | number | undefined | boolean;
 };
 
 export type Txt2ImgRequest = {
@@ -96,6 +97,13 @@ export type Txt2ImgRequest = {
   batch_size?: number | undefined;
   lora?: Array<Lora> | undefined;
   controlnet_units?: Array<ControlnetUnit> | undefined;
+  sd_vae?: string | undefined;
+  clip_skip?: number | undefined;
+  hr_upscaler?: string | undefined;
+  hr_scale?: number | undefined;
+  hr_resize_x?: number | undefined;
+  hr_resize_y?: number | undefined;
+  [key: string]: any;
 };
 
 export type Txt2ImgResponse = {
@@ -132,6 +140,40 @@ export type Img2imgRequest = {
 };
 
 export type Img2imgResponse = {
+  code: RequestCode;
+  msg: string;
+  data: {
+    task_id: string;
+  };
+};
+
+export type UpscaleBaseAttributes = {
+  image: string;
+  resize_mode: 0 | 1;
+  upscaler_1?: string | undefined;
+  upscaler_2?: string | undefined;
+  upscaling_crop?: boolean | undefined;
+  extras_upscaler_2_visibility?: number | undefined;
+  gfpgan_visibility?: number | undefined;
+  codeformer_visibility?: number | undefined;
+  codeformer_weight?: string | undefined;
+  [key: string]: number | string | undefined | boolean;
+};
+
+type ResizeMode1Attributes = UpscaleBaseAttributes & {
+  resize_mode: 1;
+  upscaling_resize_w: number;
+  upscaling_resize_h: number;
+};
+
+type ResizeMode0Attributes = UpscaleBaseAttributes & {
+  resize_mode: 0;
+  upscaling_resize: number;
+};
+
+export type UpscalseRequest = ResizeMode1Attributes | ResizeMode0Attributes;
+
+export type UpscaleResponse = {
   code: RequestCode;
   msg: string;
   data: {

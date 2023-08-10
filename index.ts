@@ -5,8 +5,11 @@ export {
   txt2Img,
   txt2ImgSync,
   img2imgSync,
-  readImgtoBase64,
+  upscale,
+  upscaleSync,
 } from "./src/client";
+
+export { OmniinferSDK } from "./src/class";
 
 export {
   Txt2ImgRequest,
@@ -14,7 +17,9 @@ export {
   Img2imgRequest,
   Img2imgResponse,
   GetModelsResponse,
-  SyncConfig
+  SyncConfig,
+  UpscaleResponse,
+  UpscalseRequest,
 } from "./src/types";
 
 export { ControlNetPreprocessor, ControlNetMode, ModelType } from "./src/enum";
