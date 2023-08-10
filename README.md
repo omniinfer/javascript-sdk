@@ -6,18 +6,24 @@ this SDK is based on the official [API documentation](https://docs.omniinfer.io/
 
 [![](https://dcbadge.vercel.app/api/server/nzqq8UScpx)](https://discord.gg/nzqq8UScpx)
 
-## Installation
+## Installation, [via npm](https://www.npmjs.com/package/omniinfer-sdk)
 
 ```bash
-npm i omniinfer-client-sdk
+npm i omniinfer-sdk
 ```
 
 ## Quick Start
 
 **Get api key refer to [https://docs.omniinfer.io/get-started](https://docs.omniinfer.io/get-started/)**
 
+**We offer two ways to use the sdk**
+
+### 1.Called as a function
+
 ```javascript
-import { txt2ImgSync } from "omniinfer-client-sdk";
+import { txt2ImgSync, setOmniinferKey } from "omniinfer-sdk";
+
+setOmniinferKey("your api key");
 
 txt2ImgSync({
   model_name: "",
@@ -31,7 +37,24 @@ txt2ImgSync({
   });
 ```
 
-## Examples [Online Demo](https://stackblitz.com/edit/stackblitz-starters-phcdal?file=src%2FApp.tsx)
+### 2.Use by way of class
+
+```javascript
+import { OmniinferSDK } from "omniinfer-sdk";
+
+const sdk = new OmniinferSDK("your api key");
+
+sdk
+  .txt2ImgSync(params)
+  .then((res) => {
+    console.log("imgs", res);
+  })
+  .catch((err) => {
+    alert(err);
+  });
+```
+
+## Examples [SDK Online DEMO](https://stackblitz.com/edit/stackblitz-starters-1pddy4?file=pages%2Findex.js)
 
 ### function list
 
@@ -41,6 +64,8 @@ txt2ImgSync({
 - txt2Img
 - txt2ImgSync
 - img2imgSync
+- upscale
+- upscaleSync
 
 ### Usage in React
 
@@ -151,5 +176,24 @@ txt2ImgSync({
   ],
 }).then((res) => {
   console.log(res);
+});
+```
+
+### Upscalse
+
+```javascript
+.upscaleSync({
+  image: base64String,
+  resize_mode: 0,
+  upscaling_resize: 2,
+})
+.then((res) => {
+  if (res) {
+    setImg(res[0]);
+  }
+  setLoading(false);
+})
+.catch((err) => {
+  alert(err);
 });
 ```

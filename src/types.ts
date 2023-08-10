@@ -195,6 +195,6 @@ export type ProgressResponse = {
     imgs: Array<string>;
     info: string | undefined;
     failed_reason: string | undefined;
-    current_images?: string | undefined | null;
+    current_images?: string | undefined | null | Array<string>;
   };
 };
