@@ -71,7 +71,7 @@ sdk
 
 ```javascript
 import * as React from 'react';
-import { txt2ImgSync } from 'omniinfer-client-sdk';
+import { txt2ImgSync } from 'omniinfer-sdk';
 import './style.css';
 
 const { useState, useCallback } = React;
@@ -128,12 +128,9 @@ When you use this model interface, keep an eye on `dependency_status` and `downl
 We recommend that you keep the interface data in memory, e.g. redux.
 
 ```javascript
-import { getModels } from "omniinfer-client-sdk";
-useEffect(() => {
-  getModels().then((res) => {
-    console.log(res.models.slice(0, 100));
-  });
-}, []);
+getModels().then((res) => {
+  console.log(res.models.slice(0, 100));
+});
 ```
 
 ### Lora Usage
