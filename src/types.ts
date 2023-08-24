@@ -80,6 +80,15 @@ export type ControlnetUnit = {
   control_mode: 0 | 1 | 2;
   module: string;
   input_image: string;
+  mask?: string | undefined;
+  resize_mode?: number | undefined;
+  lowvram?: boolean | undefined;
+  processor_res?: number | undefined;
+  threshold_a?: number | undefined;
+  threshold_b?: number | undefined;
+  guidance_start?: number | undefined;
+  guidance_end?: number | undefined;
+  pixel_perfect?: boolean | undefined;
   [key: string]: string | number | undefined | boolean;
 };
 
@@ -103,6 +112,8 @@ export type Txt2ImgRequest = {
   hr_scale?: number | undefined;
   hr_resize_x?: number | undefined;
   hr_resize_y?: number | undefined;
+  restore_faces?: boolean | undefined;
+  enable_hr?: boolean | undefined;
   [key: string]: any;
 };
 
@@ -136,6 +147,17 @@ export type Img2imgRequest = {
   restore_faces?: boolean | undefined;
   denoising_strength?: number | undefined;
   init_images: Array<string>;
+  sd_vae?: string | undefined;
+  clip_skip?: number | undefined;
+  mask?:  string | undefined;
+  resize_mode?: number | undefined;
+  image_cfg_scale?: number | undefined;
+  mask_blur?: number | undefined;
+  inpainting_fill?: number | undefined;
+  inpaint_full_res?: number | undefined;
+  inpaint_full_res_padding?: number | undefined;
+  inpainting_mask_invert?: number | undefined;
+  initial_noise_multiplier?: number | undefined;
   lora?: Array<Lora> | undefined;
 };
 
