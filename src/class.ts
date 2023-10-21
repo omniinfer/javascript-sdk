@@ -13,14 +13,14 @@ import {
 } from "./types";
 import { addLoraPrompt, generateLoraString, readImgtoBase64 } from "./util";
 import { ERROR_GENERATE_IMG_FAILED } from "./enum";
+import {
+  Omniinfer_axiosInstance,
+  Set_Omniinfer_axiosInstance_Key,
+} from "./config";
 
 export class OmniinferSDK {
-  protected key: string;
-  protected BASE_URL: string;
-
   constructor(key: string) {
-    this.key = key;
-    this.BASE_URL = "https://api.omniinfer.io";
+    Set_Omniinfer_axiosInstance_Key(key);
   }
 
   httpFetch({
@@ -34,22 +34,9 @@ export class OmniinferSDK {
     data?: Record<string, any> | undefined;
     query?: Record<string, any> | undefined;
   }) {
-    let fetchUrl = this.BASE_URL + url;
-
-    if (query) {
-      fetchUrl += "?" + new URLSearchParams(query).toString();
-    }
-
-    const headers = {
-      "Content-Type": "application/json",
-      "X-Omni-Source": "js-sdk",
-      ...(this.key ? { "X-Omni-Key": this.key } : {}),
-    };
-
-    return axios({
-      url: fetchUrl,
+    return Omniinfer_axiosInstance({
+      url: url,
       method: method,
-      headers: headers,
       data: data,
       params: query,
     })

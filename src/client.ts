@@ -1,9 +1,7 @@
-import axios from "axios";
 import { ERROR_GENERATE_IMG_FAILED } from "./enum";
 import {
   GetModelsResponse,
   Img2imgRequest,
-  OmniinferConfig,
   ProgressRequest,
   ProgressResponse,
   RequestCode,
@@ -14,14 +12,13 @@ import {
   UpscalseRequest,
 } from "./types";
 import { addLoraPrompt, generateLoraString, readImgtoBase64 } from "./util";
-
-const Omniinfer_Config: OmniinferConfig = {
-  BASE_URL: "https://api.omniinfer.io",
-  key: undefined,
-};
+import {
+  Omniinfer_axiosInstance,
+  Set_Omniinfer_axiosInstance_Key,
+} from "./config";
 
 export function setOmniinferKey(key: string) {
-  Omniinfer_Config.key = key;
+  Set_Omniinfer_axiosInstance_Key(key);
 }
 
 export function httpFetch({
@@ -35,22 +32,9 @@ export function httpFetch({
   data?: Record<string, any> | undefined;
   query?: Record<string, any> | undefined;
 }) {
-  let fetchUrl = Omniinfer_Config.BASE_URL + url;
-
-  if (query) {
-    fetchUrl += "?" + new URLSearchParams(query).toString();
-  }
-
-  const headers = {
-    "Content-Type": "application/json",
-    "X-Omni-Source": "Omniinfer",
-    ...(Omniinfer_Config.key ? { "X-Omni-Key": Omniinfer_Config.key } : {}),
-  };
-
-  return axios({
-    url: fetchUrl,
+  return Omniinfer_axiosInstance({
+    url: url,
     method: method,
-    headers: headers,
     data: data,
     params: query,
   })
